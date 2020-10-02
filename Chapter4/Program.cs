@@ -10,29 +10,28 @@ namespace Chapter4
     class Program
     {
         #region リスト4.27(～P.116まで)
-        /*
-        static void Main(string[] args)
-        {
-            string code = "12345";
+        //static void Main(string[] args)
+        //{
+        //    string code = "12345";
 
-            var message = GetMessage(code) ?? DefaultMessage();
-            Console.WriteLine(message);
-        }
+        //    var message = GetMessage(code) ?? DefaultMessage();
+        //    Console.WriteLine(message);
+        //}
 
-        //スタブ
-        private static object DefaultMessage()
-        {
-            return "DefaultMessage";
-        }
+        ////スタブ
+        //private static object DefaultMessage()
+        //{
+        //    return "DefaultMessage";
+        //}
 
-        //スタブ
-        private static object GetMessage(string code)
-        {
-            return "1";
-        }
-        */
+        ////スタブ
+        //private static object GetMessage(string code)
+        //{
+        //    return "1";
+        //}
         #endregion
 
+        #region リスト4.28(～P.117まで)
         static void Main(string[] args)
         {
             Console.WriteLine(GetProduct());
@@ -43,7 +42,7 @@ namespace Chapter4
             Sale sale = new Sale
             {
                 ShopNema = "pet store",
-                Amount = 100000,
+                //Amount = 1000000,
                 Product = "food",
             };
 
@@ -60,8 +59,9 @@ namespace Chapter4
             public string ShopNema { get; set; }
 
             //売上高
-            public int Amount { get; set; }
+            public int Amount { get; set; } = 1000000;  //初期化(オブジェクトの初期化はしない)
             public string Product { get; set; }
         }
+        #endregion
     }
 }
