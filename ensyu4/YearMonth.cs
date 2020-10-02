@@ -33,11 +33,11 @@ namespace ensyu4
         public YearMonth AddOneMonth()
         {
             //1～11月のとき
-            if (Year == 12)
+            if (this.Month == 12)
             {
                 return new YearMonth(Year + 1, 1);
-               
             }
+
             //12月のとき
             else
             {
