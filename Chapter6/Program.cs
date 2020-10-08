@@ -134,8 +134,14 @@ namespace Chapter6
             {
                 Console.Write(titles + " ");
             }
+            Console.WriteLine("\n\n-----------------------");
 
             //ページの多い順に並べ替え(または金額の高い順)
+            var sortedBooks = books.OrderByDescending(book => book.Pages);
+            foreach (var book in sortedBooks)
+            {
+                Console.WriteLine(book.Title + " " + book.Pages);
+            }
         }
     }
 }
