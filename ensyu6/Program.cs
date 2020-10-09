@@ -69,7 +69,6 @@ namespace ensyu6
             #endregion
 
             #region 6.2
-            Console.WriteLine("\n--------------------");
             var books = new List<Book>
             {
                 new Book { Title = "C#プログラミングの新常識", Price = 3800, Pages = 378 },
@@ -86,10 +85,69 @@ namespace ensyu6
             #region 6.2.1
             Console.WriteLine("\n--------------------");
             Console.WriteLine("問6.2.1");
-            books.Where(n => n.Title == "ワンダフル・C#ライフ");
+            //foreach (var item in books.Where(n => n.Title == "ワンダフル・C#ライフ"))
+            //{
+            //    Console.Write("価格：" + item.Price + " " + "ページ：" + item.Pages);
+            //}
 
+            var book = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
+            if (book != null)
+            {
+                Console.WriteLine($"{book.Price}{book.Pages}");
+            }
+            #endregion
 
+            #region 6.2.2
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.2");
 
+            int count = books.Count(b => b.Title.Contains("C#"));
+            Console.WriteLine(count);
+
+            #endregion
+
+            #region 6.2.3
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.3");
+            var average = books.Where(b => b.Title.Contains("C#")).Average(b => b.Pages);
+            Console.WriteLine(average);
+            #endregion
+
+            #region 6.2.4
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.4");
+            var bk = books.FirstOrDefault(b => b.Price >= 4000);
+            if (bk!=null)
+            {
+                Console.WriteLine(bk.Title);
+            }
+            #endregion
+
+            #region 6.2.5
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.5");
+            var pages = books.Where(b => b.Price < 4000).Max(b=>b.Pages);
+            Console.WriteLine(pages);
+            #endregion
+
+            #region 6.2.6
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.6");
+            var selected = books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price);
+            foreach (var item in selected)
+            {
+                Console.WriteLine("{0}{1}", book.Title, book.Price);
+            }
+            #endregion
+
+            #region 6.2.7
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("問6.2.7");
+            var st = books.Where(b => b.Title.Contains("C#") && b.Pages <= 500);
+            foreach (var item in st)
+            {
+                Console.WriteLine(item.Title);
+            }
             #endregion
 
         }
