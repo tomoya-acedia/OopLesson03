@@ -24,7 +24,7 @@ namespace ensyu6
             int pos = numbers.Length - 2;
             foreach (var number in numbers.Skip(pos))
             {
-                Console.Write(number+" ");
+                Console.Write(number + " ");
             }
             #endregion
 
@@ -117,7 +117,7 @@ namespace ensyu6
             Console.WriteLine("\n--------------------");
             Console.WriteLine("問6.2.4");
             var bk = books.FirstOrDefault(b => b.Price >= 4000);
-            if (bk!=null)
+            if (bk != null)
             {
                 Console.WriteLine(bk.Title);
             }
@@ -126,7 +126,7 @@ namespace ensyu6
             #region 6.2.5
             Console.WriteLine("\n--------------------");
             Console.WriteLine("問6.2.5");
-            var pages = books.Where(b => b.Price < 4000).Max(b=>b.Pages);
+            var pages = books.Where(b => b.Price < 4000).Max(b => b.Pages);
             Console.WriteLine(pages);
             #endregion
 
@@ -150,6 +150,24 @@ namespace ensyu6
             }
             #endregion
 
+            //C#の数をカウント
+            Console.WriteLine("\n--------------------");
+            var ans = books.Count(b => b.Title.Contains("C#"));
+            Console.WriteLine(ans);
+
+            //先生のソース
+            int count2 = 0;
+            foreach (var item in books.Where(b => b.Title.Contains("C#")))
+            {
+                for (int i = 0; i < book.Title.Length - 1; i++)
+                {
+                    if ((book.Title[i] == 'C') && (book.Title[i + 1] == '#'))
+                    {
+                        count2++;
+                    }
+                }
+            }
+            Console.WriteLine($"文字列「C#」の個数は{count2}です。");
         }
     }
 }
