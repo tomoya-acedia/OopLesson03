@@ -92,46 +92,134 @@ namespace Chapter7
             //var s = dict[md];
             //Console.WriteLine(s);
 
-            //テキストファイルを読み込む
-            var lines = File.ReadAllLines("sample.txt");
-            var we = new WordsExtractor(lines);
-            foreach (var word in we.Extract())
-            {
-                Console.WriteLine(word);
-            }
+            ////テキストファイルを読み込む
+            //var lines = File.ReadAllLines("sample.txt");
+            //var we = new WordsExtractor(lines);
+            //foreach (var word in we.Extract())
+            //{
+            //    Console.WriteLine(word);
+            //}
+
+
+            //DuplicateKeySample();
             #endregion
 
-            DuplicateKeySample();
-        }
+            #region リストを2つ使うものだと勘違いしていた
+            //    Console.Write("**********************\n* 辞書登録プログラム *\n**********************\n");
 
-        static public void DuplicateKeySample()
-        {
+            //    var list_key = new List<string>();
+            //    var list_value = new List<string>();
+
+            //    Console.WriteLine("1:登録 2:内容を表示 3:終了");
+
+            //    while (true)
+            //    {
+            //        int select = int.Parse(Console.ReadLine());
+            //        if (select == 1)
+            //        {
+            //            Console.Write("KEYを入力 : ");
+            //            var key = Console.ReadLine();
+
+            //            Console.Write("VALUEを入力 : ");
+            //            var value = Console.ReadLine();
+
+            //            Console.WriteLine("登録しました");
+            //            list_key.Add(key);
+            //            list_value.Add(value);
+            //        }
+
+            //        if (select == 2)
+            //        {
+            //            foreach (var key in list_key)
+            //            {
+            //                foreach (var value in list_value)
+            //                {
+            //                    Console.WriteLine($"{key}:{value}");
+            //                }
+            //            }
+            //            break;
+            //        }
+            //        if (select == 3)
+            //        {
+            //            Console.WriteLine("終了");
+            //            break;
+            //        }
+
+            //    }
+
+            #endregion
+
+            Console.Write("**********************\n* 辞書登録プログラム *\n**********************\n");
+
             // ディクショナリの初期化
-            var dict = new Dictionary<string, List<string>>() {
-               { "PC", new List<string> { "パーソナル コンピュータ", "プログラム カウンタ", } },
-               { "CD", new List<string> { "コンパクト ディスク", "キャッシュ ディスペンサー", } },
-            };
+            var dict = new Dictionary<string, List<string>>();
 
-            // ディクショナリに追加
-            var key = "EC";
-            var value = "電子商取引";
-            if (dict.ContainsKey(key))
+            while(true)
             {
-                dict[key].Add(value);
-            }
-            else
-            {
-                dict[key] = new List<string> { value };
-            }
-
-            // ディクショナリの内容を列挙
-            foreach (var item in dict)
-            {
-                foreach (var term in item.Value)
+                Console.WriteLine("\n1:登録 2:内容を表示 3:終了");
+                int select = int.Parse(Console.ReadLine());
+               
+                if (select == 1)
                 {
-                    Console.WriteLine("{0} : {1}", item.Key, term);
+                    Console.Write("KEYを入力 : ");
+                    var key = Console.ReadLine(); ;
+                    Console.Write("Valueを入力 : ");
+                    var value = Console.ReadLine(); ;
+
+                    if (dict.ContainsKey(key))
+                    {
+                        dict[key].Add(value);
+                    }
+                    else
+                    {
+                        dict[key] = new List<string> { value };
+                    }
+                }
+                   
+                if (select == 2)
+                {
+                    // ディクショナリの内容を列挙
+                    foreach (var item in dict)
+                    {
+                        foreach (var term in item.Value)
+                        {
+                            Console.WriteLine("{0} : {1}", item.Key, term);
+                        }
+                    }
+                    break;
                 }
             }
         }
+        #region P196まで
+        //    static public void DuplicateKeySample()
+        //{
+        //    // ディクショナリの初期化
+        //    var dict = new Dictionary<string, List<string>>() {
+        //       { "PC", new List<string> { "パーソナル コンピュータ", "プログラム カウンタ", } },
+        //       { "CD", new List<string> { "コンパクト ディスク", "キャッシュ ディスペンサー", } },
+        //    };
+
+        //    // ディクショナリに追加
+        //    var key = "EC";
+        //    var value = "電子商取引";
+        //    if (dict.ContainsKey(key))
+        //    {
+        //        dict[key].Add(value);
+        //    }
+        //    else
+        //    {
+        //        dict[key] = new List<string> { value };
+        //    }
+
+        //    // ディクショナリの内容を列挙
+        //    foreach (var item in dict)
+        //    {
+        //        foreach (var term in item.Value)
+        //        {
+        //            Console.WriteLine("{0} : {1}", item.Key, term);
+        //        }
+        //    }
+        //}
+        #endregion
     }
 }
