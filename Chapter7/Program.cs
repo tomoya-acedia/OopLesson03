@@ -104,7 +104,7 @@ namespace Chapter7
             //DuplicateKeySample();
             #endregion
 
-            #region リストを2つ使うものだと勘違いしていた
+            #region (辞書登録プログラム)リストを2つ使うものだと勘違いしていた。
             //    Console.Write("**********************\n* 辞書登録プログラム *\n**********************\n");
 
             //    var list_key = new List<string>();
@@ -149,8 +149,12 @@ namespace Chapter7
 
             #endregion
 
-            Console.Write("**********************\n* 辞書登録プログラム *\n**********************\n");
+            //Console.Write("**********************\n* 辞書登録プログラム *\n**********************\n");
 
+            Console.WriteLine("**********************");
+            Console.WriteLine("* 辞書登録プログラム *");
+            Console.WriteLine("**********************");
+            
             // ディクショナリの初期化
             var dict = new Dictionary<string, List<string>>();
 
