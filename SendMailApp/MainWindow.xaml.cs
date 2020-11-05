@@ -57,6 +57,8 @@ namespace SendMailApp
 
                 msg.Subject = tbTitle.Text;     //件名
                 msg.Body = tbBody.Text;         //本文
+                msg.Bcc.Add(tbBcc.Text);
+                msg.CC.Add(tbCc.Text);
 
                 sc.Host = "smtp.gmail.com";     //SMTPサーバーの設定
                 sc.Port = 587;
@@ -66,6 +68,7 @@ namespace SendMailApp
                 //sc.Send(msg);                   //送信
                 sc.SendMailAsync(msg);
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
