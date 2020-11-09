@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,9 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.Mail;
-using System.Net;
-using System.ComponentModel;
 
 namespace SendMailApp
 {
@@ -23,28 +22,25 @@ namespace SendMailApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
         SmtpClient sc = new SmtpClient();
 
         public MainWindow()
         {
             InitializeComponent();
-
             sc.SendCompleted += Sc_SendCompleted;
-
         }
 
         //送信完了イベント
-        private void Sc_SendCompleted(object sender, AsyncCompletedEventArgs e)
+        private void Sc_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
                 MessageBox.Show("送信はキャンセルされました。");
             }
-
             else
             {
-                MessageBox.Show(e.Error?.Message ?? "送信完了" +
-                    "");
+                MessageBox.Show(e.Error?.Message ?? "送信完了！");
             }
         }
 
@@ -53,28 +49,29 @@ namespace SendMailApp
         {
             try
             {
-                MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);//送信元・宛先
+                MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);
+                if (tbCc.Text != "")
+                    msg.CC.Add(tbCc.Text);
 
-                msg.Subject = tbTitle.Text;     //件名
-                msg.Body = tbBody.Text;         //本文
-                msg.Bcc.Add(tbBcc.Text);
-                msg.CC.Add(tbCc.Text);
+                if (tbBcc.Text != "")
+                    msg.Bcc.Add(tbBcc.Text);
 
-                sc.Host = "smtp.gmail.com";     //SMTPサーバーの設定
+                msg.Subject = tbTitle.Text; //件名
+                msg.Body = tbBody.Text;//本文
+
+                sc.Host = "smtp.gmail.com";//SMTPサーバーの設定
                 sc.Port = 587;
                 sc.EnableSsl = true;
-                sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");//認証の設定
+                sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
 
-                //sc.Send(msg);                   //送信
+                //sc.Send(msg);   //送信
                 sc.SendMailAsync(msg);
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
         //送信キャンセル処理
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -84,8 +81,8 @@ namespace SendMailApp
         //設定画面表示
         private void btConfig_Click(object sender, RoutedEventArgs e)
         {
-            ConfigWindow configWindow = new ConfigWindow();     //設定画面のインスタンスを生成
-            configWindow.ShowDialog();                          //表示
+            ConfigWindow configWindow = new ConfigWindow();//設定画面のインスタンスを生成
+            configWindow.Show();  //表示
         }
 
         //メインウィンドウがロードされるタイミングで呼び出される

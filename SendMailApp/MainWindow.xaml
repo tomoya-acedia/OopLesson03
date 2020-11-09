@@ -11,7 +11,6 @@
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="85*"/>
         </Grid.ColumnDefinitions>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -21,32 +20,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="件名：" 
-                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
+                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>
         <TextBox x:Name="tbTitle" Grid.Row="0" Grid.Column="1" Margin="5"/>
-
-
         <TextBlock Grid.Row="1" Grid.Column="0" Text="To：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="5"/>
-
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="CC：" 
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Cc：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="5"/>
-
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Bcc：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5"/>
-
         <TextBlock Grid.Row="4" Grid.Column="0" Text="本文：" 
                    FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="5"/>
-
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="10" Click="btCancel_Click"/>
-            <Button x:Name="btOk" Content="送信" Width="100" Margin="10" Click="btOk_Click"/>
+            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="5" Click="btCancel_Click"/>
+            <Button x:Name="btOk" Content="送信" Width="100" Margin="5" Click="btOk_Click"/>
         </StackPanel>
-
         <Button x:Name="btConfig" Grid.Row="5" Margin="10" Content="設定" Click="btConfig_Click"/>
-
     </Grid>
 </Window>
