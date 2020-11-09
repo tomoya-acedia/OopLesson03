@@ -60,6 +60,12 @@ namespace SendMailApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             btDefault_Click(sender, e);
+            Config.GetInstance().DeSerialise();//逆シリアル化　XML⇒オブジェクト
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Config.GetInstance().Serialise();   //シリアル化　オブジェクト⇒XML
         }
     }
 }

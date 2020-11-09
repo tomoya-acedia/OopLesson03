@@ -66,5 +66,15 @@ namespace SendMailApp
             this.Ssl = ssl;
             return true;
         }
+
+        public void Serialise()     //シリアル化     P305参考
+        {
+
+        }
+
+        public void DeSerialise()   //逆シリアル化    P307参考
+        {
+
+        }
     }
 }
