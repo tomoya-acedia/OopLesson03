@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -22,7 +23,6 @@ namespace SendMailApp
     /// </summary>
     public partial class MainWindow : Window
     {
-
         SmtpClient sc = new SmtpClient();
 
         public MainWindow()
@@ -40,31 +40,36 @@ namespace SendMailApp
             }
             else
             {
-                MessageBox.Show(e.Error?.Message ?? "送信完了！");
+                MessageBox.Show(e.Error?.Message ?? "送信完了!");
             }
         }
 
-        //メール送信処理
+        //メール送信
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 MailMessage msg = new MailMessage("ojsinfosys01@gmail.com", tbTo.Text);
+
                 if (tbCc.Text != "")
-                    msg.CC.Add(tbCc.Text);
+                {
+                    msg.CC.Add(tbCc.Text); //
+                }
 
                 if (tbBcc.Text != "")
+                {
                     msg.Bcc.Add(tbBcc.Text);
-
+                }
                 msg.Subject = tbTitle.Text; //件名
-                msg.Body = tbBody.Text;//本文
+                msg.Body = tbBody.Text; //本文
 
-                sc.Host = "smtp.gmail.com";//SMTPサーバーの設定
-                sc.Port = 587;
+
+                sc.Host = "smtp.gmail.com"; //SMTPサーバーの設定
+                sc.Port = 587; //PORTの設定
                 sc.EnableSsl = true;
                 sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
 
-                //sc.Send(msg);   //送信
+                //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);
             }
             catch (Exception ex)
@@ -72,23 +77,56 @@ namespace SendMailApp
                 MessageBox.Show(ex.Message);
             }
         }
-        //送信キャンセル処理
+
+        //送信キャンセル
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             sc.SendAsyncCancel();
         }
 
-        //設定画面表示
+        //設定ボタンイベントハンドラ
         private void btConfig_Click(object sender, RoutedEventArgs e)
         {
-            ConfigWindow configWindow = new ConfigWindow();//設定画面のインスタンスを生成
-            configWindow.Show();  //表示
+            ConfigWindowShow();//設定画面表示
+        }
+
+        //画面表示
+        private static void ConfigWindowShow()
+        {
+            ConfigWindow configWindow = new ConfigWindow();     //設定画面のインスタンス生成
+            configWindow.ShowDialog();      //表示
         }
 
         //メインウィンドウがロードされるタイミングで呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Config.GetInstance().DeSerialise();//逆シリアル化 XML → オブジェクト
+            }
+            catch (FileNotFoundException)
+            {
+                ConfigWindowShow();//ファイルが存在しないので設定画面を先に表示
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                Config.GetInstance().Serialise();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
         }
     }
 }

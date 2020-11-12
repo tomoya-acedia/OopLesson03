@@ -47,8 +47,27 @@ namespace SendMailApp
         //OKボタン
         private void btOk_Click(object sender, RoutedEventArgs e)
         {
-            btApply_Click(sender, e);   //更新処理を呼び出す
-            this.Close();
+            if (tbSmtp.Text == "")
+            {
+                MessageBox.Show("SMTPが入力されていません");
+            }
+            else if (int.Parse(tbPort.Text) == 0)
+            {
+                MessageBox.Show("ポートが入力されていません");
+            }
+            else if (tbUserName.Text == "")
+            {
+                MessageBox.Show("ユーザー名が入力されていません");
+            }
+            else if (tbPassWord.Password == "")
+            {
+                MessageBox.Show("パスワードが入力されていません");
+            }
+            else
+            {
+                btApply_Click(sender, e);   //更新処理を呼び出す
+                this.Close();
+            }
         }
         //キャンセルボタン
         private void btCancel_Click(object sender, RoutedEventArgs e)
@@ -59,13 +78,31 @@ namespace SendMailApp
         //ロード時に一度だけ呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            btDefault_Click(sender, e);
-            Config.GetInstance().DeSerialise();//逆シリアル化　XML⇒オブジェクト
+            try
+            {
+                // btDefault_Click(sender, e);
+                Config.GetInstance().DeSerialise();//逆シリアル化　XML⇒オブジェクト
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+           
+          
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Config.GetInstance().Serialise();   //シリアル化　オブジェクト⇒XML
+            try
+            {
+                Config.GetInstance().Serialise(); //シリアル化　オブジェクト⇒XML
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
         }
     }
 }

@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
+        Title="MainWindow" Height="400" Width="1500" Loaded="Window_Loaded">
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="544*"/>
+            <ColumnDefinition Width="76*"/>
+            <ColumnDefinition Width="280*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -38,6 +40,10 @@
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="5" Click="btCancel_Click"/>
             <Button x:Name="btOk" Content="送信" Width="100" Margin="5" Click="btOk_Click"/>
         </StackPanel>
-        <Button x:Name="btConfig" Grid.Row="5" Margin="10" Content="設定" Click="btConfig_Click"/>
+        <Button x:Name="btConfig" Grid.Row="5" Margin="10" Content="設定" Click="ConfigWindowShow"/>
+
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="添付ファイル：" 
+                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>
     </Grid>
 </Window>
