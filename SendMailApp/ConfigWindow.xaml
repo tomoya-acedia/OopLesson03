@@ -28,7 +28,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="SMTPサーバー：" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <TextBox x:Name="tbSmtp" Grid.Row="0" Grid.Column="1" Margin="5,20"/>
+                <TextBox x:Name="tbSmtp" Grid.Row="0" Grid.Column="1" Margin="5,20" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="ユーザー名：" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
