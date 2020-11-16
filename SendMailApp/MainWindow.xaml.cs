@@ -66,12 +66,19 @@ namespace SendMailApp
 
 
                 sc.Host = "smtp.gmail.com"; //SMTPサーバーの設定
-                sc.Port = 587; //PORTの設定
+                sc.Port = Config.GetInstance().Port;
+                //sc.Port = 587; //PORTの設定
                 sc.EnableSsl = true;
                 sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "ojsInfosys2020");
-
                 //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);
+
+
+                foreach (var item in tbFile.Items)
+                {
+                    msg.Attachments.Add(new Attachment(item.ToString()));
+                }
+                
             }
             catch (Exception ex)
             {

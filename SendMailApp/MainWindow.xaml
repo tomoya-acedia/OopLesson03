@@ -23,16 +23,16 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="件名：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>
-        <TextBox x:Name="tbTitle" Grid.Row="0" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbTitle" Grid.Row="0" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="To：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Cc：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Bcc：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="本文：" 
                    FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="10" Grid.ColumnSpan="3" />
@@ -41,7 +41,7 @@
             <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="5" Click="btCancel_Click" FontSize="20"/>
             <Button x:Name="btOk" Content="送信" Width="100" Margin="5" Click="btOk_Click" FontSize="30"/>
         </StackPanel>
-        <Button x:Name="btConfig" Grid.Row="5" Margin="5" Content="設定" FontSize="22"/>
+        <Button x:Name="btConfig" Grid.Row="5" Margin="5" Content="設定" FontSize="22" Click="btConfig_Click"/>
 
         <TextBlock Grid.Row="0" Grid.Column="2" Text="添付ファイル：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>

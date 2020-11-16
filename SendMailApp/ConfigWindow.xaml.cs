@@ -26,7 +26,7 @@ namespace SendMailApp
 
         private void btDefault_Click(object sender, RoutedEventArgs e)
         {
-            Config cf = (Config.GetInstance()).getDefaultStatus();
+            Config cf = (Config.GetInstance()).getDefaultStatic();
 
             tbSmtp.Text = cf.Smtp;
             tbPort.Text = cf.Port.ToString();
@@ -34,34 +34,39 @@ namespace SendMailApp
             tbPassWord.Password = cf.PassWord;
             cbSsl.IsChecked = cf.Ssl;
         }
-        //適用（更新）
+
+        //適用(更新)
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-            (Config.GetInstance()).UpdateStatus(
-                tbSmtp.Text,
-                tbUserName.Text,
-                tbPassWord.Password,
-                int.Parse(tbPort.Text),
-                cbSsl.IsChecked ?? false);   //更新処理を呼び出す
-        }
-        //OKボタン
-        private void btOk_Click(object sender, RoutedEventArgs e)
-        {
-            if (tbSmtp.Text == "")
+            if (tbSmtp.Text == "" || tbUserName.Text == "" || tbPassWord.Password == "" || tbPort.Text == "")
             {
-                MessageBox.Show("SMTPが入力されていません");
+                MessageBox.Show("警告");
+            }
+            else
+            {
+                //更新処理を呼び出す
+                (Config.GetInstance()).UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password, int.Parse(tbPort.Text), cbSsl.IsChecked ?? false);
+            }
+        }
+
+        //OKボタン
+        private void btOK_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbPassWord.Password == "")
+            {
+                MessageBox.Show("パスワードを入力してください");
             }
             else if (int.Parse(tbPort.Text) == 0)
             {
-                MessageBox.Show("ポートが入力されていません");
+                MessageBox.Show("ポート番号を入力してください");
+            }
+            else if (tbSmtp.Text == "")
+            {
+                MessageBox.Show("SMTPを入力してください");
             }
             else if (tbUserName.Text == "")
             {
-                MessageBox.Show("ユーザー名が入力されていません");
-            }
-            else if (tbPassWord.Password == "")
-            {
-                MessageBox.Show("パスワードが入力されていません");
+                MessageBox.Show("メールアドレスを入力してください");
             }
             else
             {
@@ -69,40 +74,35 @@ namespace SendMailApp
                 this.Close();
             }
         }
-        //キャンセルボタン
+
+        //Cancelボタン
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (tbPassWord.Password != null || tbPort.Text != null
+                || tbSmtp.Text != null || tbUserName.Text != null)
+            {
+                MessageBoxResult result = MessageBox.Show("変更が反映されていません。", "", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    this.Close();
+
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                }
+            }
         }
 
-        //ロード時に一度だけ呼び出される
+        //設定画面ロード時に一度だけ呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // btDefault_Click(sender, e);
-                Config.GetInstance().DeSerialise();//逆シリアル化　XML⇒オブジェクト
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-           
-          
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                Config.GetInstance().Serialise(); //シリアル化　オブジェクト⇒XML
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
+            Config stf = (Config.GetInstance());
+            tbUserName.Text = stf.MailAddress;
+            tbPassWord.Password = stf.PassWord;
+            tbSmtp.Text = stf.Smtp;
+            cbSsl.IsChecked = stf.Ssl;
+            tbSender.Text = stf.MailAddress;
+            tbPort.Text = stf.Port.ToString();
         }
     }
 }
