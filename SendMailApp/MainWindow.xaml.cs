@@ -78,7 +78,7 @@ namespace SendMailApp
                 {
                     msg.Attachments.Add(new Attachment(item.ToString()));
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -142,14 +142,11 @@ namespace SendMailApp
         {
             var fod = new OpenFileDialog();
 
-            fod.Multiselect = true;
-
             if (fod.ShowDialog() == true)
             {
-                foreach (var item in fod.FileNames)
-                {
-                    tbFile.Items.Add(item);
-                }
+
+                tbFile.Items.Add(fod.FileName);
+
             }
         }
 
