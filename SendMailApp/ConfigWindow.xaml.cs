@@ -11,22 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
 
-namespace SendMailApp
+namespace SendMailApp 
 {
     /// <summary>
     /// ConfigWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class ConfigWindow : Window
+    public partial class ConfigWindow : Window 
     {
-        public ConfigWindow()
+
+        public bool Change = false;
+
+        public ConfigWindow() 
         {
             InitializeComponent();
         }
 
         private void btDefault_Click(object sender, RoutedEventArgs e)
         {
-            Config cf = (Config.GetInstance()).getDefaultStatic();
+
+            Config cf = Config.GetInstance().getDefaultStatus();
 
             tbSmtp.Text = cf.Smtp;
             tbPort.Text = cf.Port.ToString();
@@ -38,19 +43,24 @@ namespace SendMailApp
         //適用(更新)
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-            if (tbSmtp.Text == "" || tbUserName.Text == "" || tbPassWord.Password == "" || tbPort.Text == "")
+            try
             {
-                MessageBox.Show("警告");
+                Config.GetInstance().UpdateStatus(
+                tbSmtp.Text,
+                tbUserName.Text,
+                tbPassWord.Password,
+                int.Parse(tbPort.Text),
+                cbSsl.IsChecked ?? false);
+                ChangeOk(sender, e);
             }
-            else
+            catch (Exception ex)
             {
-                //更新処理を呼び出す
-                (Config.GetInstance()).UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password, int.Parse(tbPort.Text), cbSsl.IsChecked ?? false);
+                MessageBox.Show("値を入力してください");
             }
         }
 
         //OKボタン
-        private void btOK_Click(object sender, RoutedEventArgs e)
+        private void btOK_Click(object sender, RoutedEventArgs e) 
         {
             if (tbPassWord.Password == "")
             {
@@ -70,7 +80,7 @@ namespace SendMailApp
             }
             else
             {
-                btApply_Click(sender, e);   //更新処理を呼び出す
+                btApply_Click(sender, e); //更新処理を呼び出す
                 this.Close();
             }
         }
@@ -78,31 +88,55 @@ namespace SendMailApp
         //Cancelボタン
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            if (tbPassWord.Password != null || tbPort.Text != null
-                || tbSmtp.Text != null || tbUserName.Text != null)
+            //if (tbPassWord.Password != null || tbPort.Text != null
+            //  || tbSmtp.Text != null || tbUserName.Text != null)
+            if (Change == true)
             {
-                MessageBoxResult result = MessageBox.Show("変更が反映されていません。", "", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("内容が変更されています。保存しますか？", "", MessageBoxButton.OKCancel);
+               
                 if (result == MessageBoxResult.OK)
                 {
+                    btApply_Click(sender, e);
                     this.Close();
-
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
+                    ChangeOk(sender, e);
+                    this.Close();
                 }
+            } 
+            else {
+                ChangeOk(sender, e);
+                this.Close();
             }
         }
 
         //設定画面ロード時に一度だけ呼び出される
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e) 
         {
-            Config stf = (Config.GetInstance());
+            Config stf = Config.GetInstance();
+
+            stf = Config.GetInstance();
+            tbSmtp.Text = stf.Smtp;
             tbUserName.Text = stf.MailAddress;
             tbPassWord.Password = stf.PassWord;
-            tbSmtp.Text = stf.Smtp;
-            cbSsl.IsChecked = stf.Ssl;
-            tbSender.Text = stf.MailAddress;
             tbPort.Text = stf.Port.ToString();
+            cbSsl.IsChecked = stf.Ssl;
+
+        }
+
+        private void Arate()
+        {
+            if (tbPassWord == null || tbPort == null || tbSender == null || tbSmtp == null || tbUserName == null) 
+            {
+                MessageBox.Show("正しい値を入力してください");
+                return;
+            }
+        }
+
+        private void ChangeOk(object sender, RoutedEventArgs e) 
+        {
+            Change = false;
         }
     }
 }

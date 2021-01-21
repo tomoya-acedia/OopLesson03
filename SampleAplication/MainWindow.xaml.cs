@@ -25,7 +25,7 @@ namespace SampleAplication
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btConfig_Click(object sender, RoutedEventArgs e)
         {
 
         }

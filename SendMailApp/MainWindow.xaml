@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1560" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="1560" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="46*"/>
@@ -21,34 +21,31 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="件名：" 
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="件名："
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>
         <TextBox x:Name="tbTitle" Grid.Row="0" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="To：" 
-                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
+                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Cc：" 
-                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
+                   FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Bcc：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="5" FontSize="35"/>
+        <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1"  Margin="5" FontSize="35"/>
         <TextBlock Grid.Row="4" Grid.Column="0" Text="本文：" 
-                   FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="10" Grid.ColumnSpan="3" />
-
+                   FontSize="20" VerticalAlignment="Top"  HorizontalAlignment="Right" Margin="4"/>
+        <TextBox x:Name="tbBody" Grid.Row="4" Grid.Column="1" Margin="10" Grid.ColumnSpan="3"/>
         <StackPanel Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="5" Click="btCancel_Click" FontSize="20"/>
-            <Button x:Name="btOk" Content="送信" Width="100" Margin="5" Click="btOk_Click" FontSize="30"/>
+            <Button x:Name="btCancel" Content="キャンセル" Width="100" Margin="5"  Click="btCancel_Click" FontSize="20"/>
+            <Button x:Name="btOK" Content="送信" Width="100" Margin="5" Click="btOK_Click" FontSize="30" />
         </StackPanel>
         <Button x:Name="btConfig" Grid.Row="5" Margin="5" Content="設定" FontSize="22" Click="btConfig_Click"/>
-
         <TextBlock Grid.Row="0" Grid.Column="2" Text="添付ファイル：" 
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="2"/>
-        <ListBox x:Name="tbFile" Grid.Row="0" Grid.Column="3" Margin="5" Grid.RowSpan="4"/>
-        
-        <Button x:Name="btAdd" Grid.Column="2" Grid.Row="2" Content="追加" Width="100" Margin="5" Click="btAdd_Click" FontSize="30"/>
-
-        <Button x:Name="btDelete" Grid.Column="2" Grid.Row="3" Content="削除" Width="100" Margin="5" FontSize="30" Click="btDelete_Click"/>
+        <ListBox x:Name="tbFile" Grid.Row="0" Grid.Column="3" Margin="5"  Grid.RowSpan="4"/>
+        <Button x:Name="btAdd"  Grid.Column="2" Grid.Row="2" Content="追加" Width="100" Margin="5" Click="btAdd_Click" FontSize="30"/>
+        <Button x:Name="btDelete" Grid.Column="2" Grid.Row="3" Content="削除" Width="100" Margin="5"  FontSize="30" Click="btDelete_Click" />
     </Grid>
 </Window>

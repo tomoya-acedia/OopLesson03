@@ -8,36 +8,38 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace SendMailApp
+namespace SendMailApp 
 {
-    public class Config
+    public class Config 
     {
         //単一のインスタンス
-        private static Config instance = null;
+        //private static Config instance = null;
+        private static Config instance { get; set; }
 
-        public string Smtp { get; set; }    //SMTPサーバー
-        public string MailAddress { get; set; }     //自メールアドレス(送信元)
-        public string PassWord { get; set; }    //パスワード
-        public int Port { get; set; }   //ポート番号
-        public bool Ssl { get; set; }   //SSL設定
-
-        //インスタンスの取得
-        public static Config GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new Config();
-            }
-            return instance;
-        }
+        public string Smtp { get; set; }//SMTPサーバー
+        public string MailAddress { get; set; } //自メールアドレス(送信元)
+        public string PassWord { get; set; } //パスワード
+        public int Port { get; set; }//ポート番号
+        public bool Ssl { get; set; } //SSL設定
 
         //コンストラクタ(外部からnewできないようにする)
         private Config()
         {
         }
 
+        //インスタンスの取得
+        public static Config GetInstance() 
+        {
+            if (instance == null)
+            {
+                instance = new Config();
+
+            }
+            return instance;
+        }
+
         //初期設定値
-        public void DefaultSet()
+        public void DefaultSet() 
         {
             Smtp = "smtp.gmail.com";
             MailAddress = "ojsinfosys01@gmail.com";
@@ -47,25 +49,25 @@ namespace SendMailApp
         }
 
         //初期値取得
-        public Config getDefaultStatic()
+        public Config getDefaultStatus()
         {
-            Config obj = new Config
+            Config obj = new Config 
             {
                 Smtp = "smtp.gmail.com",
                 MailAddress = "ojsinfosys01@gmail.com",
                 PassWord = "ojsInfosys2020",
                 Port = 587,
-                Ssl = true,
+                Ssl = true
             };
             return obj;
         }
 
         //設定データ更新
         //public bool UpdateStatus(Config cf) //←仮引数(cf)
-        public bool UpdateStatus(string smtp, string mailAppress, string passWord, int port, bool ssl)
+        public bool UpdateStatus(string smtp, string mailAddress, string passWord, int port, bool ssl) 
         {
             this.Smtp = smtp;
-            this.MailAddress = mailAppress;
+            this.MailAddress = mailAddress;
             this.PassWord = passWord;
             this.Port = port;
             this.Ssl = ssl;
@@ -73,7 +75,7 @@ namespace SendMailApp
             return true;
         }
 
-        public void Serialise()    //シリアル化 P305参照
+        public void Serialise()     //シリアル化 P305参照 
         {
             try
             {
@@ -89,7 +91,7 @@ namespace SendMailApp
             }
         }
 
-        public void DeSerialise()   //逆シリアル化 P307参照
+        public void DeSerialise()       //逆シリアル化 P307参照 
         {
             try
             {
@@ -104,6 +106,7 @@ namespace SendMailApp
                 MessageBox.Show(ex.Message);
                 throw;
             }
+
         }
     }
 }
